@@ -1,6 +1,6 @@
-import EVALUASIDIKLATAPI from '../../api/evaluasiDiklat.js';
+import PERTANYAANEVALUASIAPI from '../../api/pertanyaanEvaluasi.js';
 
-export const evaluasiDiklat = {
+export const pertanyaanEvaluasi = {
     namespaced: true,
 
     // state
@@ -111,9 +111,9 @@ export const evaluasiDiklat = {
         //load collection with params
         index({ commit }, p) {
             commit('setDataStatS', 'loading');
-            EVALUASIDIKLATAPI.index(p)
+            PERTANYAANEVALUASIAPI.index(p)
                 .then(function(response) {
-                    console.log(response.data);
+                    console.log(response);
                     commit('setDataS', response.data.model);
                     commit('setDataStatS', 'success');
                 })
@@ -127,7 +127,7 @@ export const evaluasiDiklat = {
         create({ commit }) {
             commit('setDataStat', 'loading');
 
-            EVALUASIDIKLATAPI.create()
+            PERTANYAANEVALUASIAPI.create()
                 .then(function(response) {
 
                     commit('setData', response.data.form);
@@ -146,9 +146,10 @@ export const evaluasiDiklat = {
         //store data
         store({ commit, state, dispatch }, form) {
             commit('setUpdateStat', 'loading');
-            EVALUASIDIKLATAPI.store(form)
+            PERTANYAANEVALUASIAPI.store(form)
                 .then(function(response) {
                     if (response.data.saved) {
+                        console.log(response);
                         commit('setUpdate', response.data);
                         commit('setUpdateStat', 'success');
                     } else {
@@ -164,7 +165,7 @@ export const evaluasiDiklat = {
         // edit page
         edit({ commit }, id) {
             commit('setDataStat', 'loading');
-            EVALUASIDIKLATAPI.edit(id)
+            PERTANYAANEVALUASIAPI.edit(id)
                 .then(function(response) {
                     commit('setData', response.data.form);
                     commit('setRules', response.data.rules);
@@ -183,7 +184,7 @@ export const evaluasiDiklat = {
         // update data
         update({ commit, state, dispatch }, [id, form]) {
             commit('setUpdateStat', 'loading');
-            EVALUASIDIKLATAPI.update(id, form)
+            PERTANYAANEVALUASIAPI.update(id, form)
                 .then(function(response) {
                     if (response.data.saved) {
                         commit('setUpdate', response.data);
@@ -202,7 +203,7 @@ export const evaluasiDiklat = {
         destroy({ commit, state, dispatch }, id) {
             commit('setUpdateStat', 'loading');
 
-            EVALUASIDIKLATAPI.destroy(id)
+            PERTANYAANEVALUASIAPI.destroy(id)
                 .then(function(response) {
                     if (response.data.deleted) {
                         commit('setUpdate', response.data);

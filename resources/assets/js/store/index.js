@@ -48,7 +48,8 @@ import { kegiatanBKCU } from './modules/kegiatanBKCU';
 import { sertifikatKegiatan } from './modules/sertifikatKegiatan';
 import { halamanBaru } from './modules/halamanBaru';
 import { baruLagi } from './modules/baruLagi';
-import { evaluasiDiklat } from './modules/evaluasiDiklat';
+import { evaluasiKegiatan } from './modules/evaluasiKegiatan';
+import { pertanyaanEvaluasi } from './modules/pertanyaanEvaluasi';
 import { tempat } from './modules/tempat';
 import { pemilihan } from './modules/pemilihan';
 import { voting } from './modules/voting';
@@ -62,7 +63,7 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
 	 modules: {
-		evaluasiDiklat,
+		evaluasiKegiatan,
 		baruLagi,
 		halamanBaru,
 		 global,
@@ -117,6 +118,7 @@ export default new Vuex.Store({
 		 saran,
 		 errorLog,
 		 anggotaCuImportEscete,
-		 fileUpload
+		 fileUpload,
+		 pertanyaanEvaluasi
 	 }
 });

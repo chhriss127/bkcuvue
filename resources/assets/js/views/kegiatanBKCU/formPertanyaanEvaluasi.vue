@@ -68,7 +68,7 @@
 
 									<br>
 
-									<table class="table">
+									<!-- <table class="table">
 										<thead class="table-primary">
 											<tr>
 												<th>Id Pertanyaan</th>
@@ -93,7 +93,7 @@
 												
 											</tr>
 										</tbody>
-									</table>
+									</table> -->
 
 								</div>
 							</div>

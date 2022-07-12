@@ -49,11 +49,11 @@
 						{{ props.index + 1 + (+itemData.current_page-1) * +itemData.per_page + '.'}}
 					</td>
 					<td v-if="!columnData[1].hide">
-						<check-value :value="props.item.nama"></check-value>
+						<check-value :value="props.item.pertanyaan"></check-value>
 					</td>
-					<td v-if="!columnData[2].hide">
-						<check-value :value="props.item.comment"></check-value>
-					</td>
+					<!-- <td v-if="!columnData[2].hide">
+						<check-value :value="props.item.pertanyaan"></check-value>
+					</td> -->
 					
 				</tr>
 			</template>
@@ -68,23 +68,23 @@
 						</div>
 						<div class="card-body">
 							<template>
-								<img :src="'/images/evaluasiDiklat/' + props.item.gambar + '.jpg'" class="img-fluid wmin-sm" v-if="props.item.gambar">
+								<img :src="'/images/pertanyaanEvaluasi/' + props.item.gambar + '.jpg'" class="img-fluid wmin-sm" v-if="props.item.gambar">
 							</template>
 							
 							<hr/>
-							<h6 class="text-primary">{{ props.item.nama_sertifikat }}</h6>
+							<h6 class="text-primary">{{ props.item.pertanyaan }}</h6>
 							
 							<hr/>
 
 							<div class="row">
 								<div class="col-sm-6">
 									<ul class="list list-unstyled mb-1">
-										<li>Nama: <span class="text-muted">{{ props.item.nama }}</span></li>
+										<li>id: <span class="text-muted">{{ props.item.id }}</span></li>
 										</ul>
 								</div>
 								<div class="col-sm-6">
 									<ul class="list list-unstyled mb-1">
-										<li>Comment: <span class="text-muted">{{ props.item.name }}</span></li>
+										<li>Pertanyaan: <span class="text-muted">{{ props.item.pertanyaan }}</span></li>
 										</ul>
 								</div>
 							</div>
@@ -125,7 +125,7 @@
 			return {
 				selectedItem: [],
 				query: {
-					order_column: "nama",
+					order_column: "id",
 					order_direction: "asc",
 					filter_match: "and",
 					limit: 10,
@@ -140,8 +140,8 @@
 						name: 'No.',
 					},
 					{
-						title: 'nama',
-						name: 'nama',
+						title: 'pertanyaan',
+						name: 'pertanyaan',
 						tipe: 'string',
 						sort: true,
 						hide: false,
@@ -150,17 +150,17 @@
 						filterDefault: true
 						
 					},
-					{
-						title: 'nama',
-						name: 'nama',
-						tipe: 'string',
-						sort: false,
-						hide: false,
-						disable: false,
-						filter: true,
-						filterDefault: false
+					// {
+					// 	title: 'nama',
+					// 	name: 'nama',
+					// 	tipe: 'string',
+					// 	sort: false,
+					// 	hide: false,
+					// 	disable: false,
+					// 	filter: true,
+					// 	filterDefault: false
 						
-					}
+					// }
 				],
 				keteranganBatal: '',
 				state: '',
@@ -274,7 +274,7 @@
 			...mapGetters('auth',{
 				currentUser: 'currentUser'
 			}),
-			...mapGetters('evaluasiDiklat',{
+			...mapGetters('pertanyaanEvaluasi',{
 				itemData: 'dataS',
 				itemDataStat: 'dataStatS',
 				updateMessage: 'update',
