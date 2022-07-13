@@ -406,8 +406,8 @@
 								<i class="icon-clipboard6"></i> baru lagi
 							</router-link>
 							
-							<router-link :to="{ name: 'evaluasiDiklat' }" class="dropdown-item" active-class="active" v-if="currentUser.can['create_diklat_bkcu']" exact>
-								<i class="icon-clipboard6"></i> evaluasi diklat
+							<router-link :to="{ name: 'pertanyaanEvaluasi' }" class="dropdown-item" active-class="active" v-if="currentUser.can['create_diklat_bkcu']" exact>
+								<i class="icon-clipboard6"></i> evaluasi Pertanyaan
 							</router-link>
 							
 

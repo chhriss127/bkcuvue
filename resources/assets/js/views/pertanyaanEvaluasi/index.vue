@@ -39,8 +39,8 @@
 		},
 		data() {
 			return {
-				title: 'evaluasi diklat',
-				kelas: 'evaluasiDiklat',
+				title: 'Pertanyaan Evaluasi',
+				kelas: 'pertanyaanEvaluasi',
 				titleDesc: 'Mengelola data evaluasi diklat',
 				titleIcon: 'icon-clipboard6',
 			}
@@ -55,7 +55,7 @@
 			
 		},
 		computed: {
-			...mapGetters('evaluasiDiklat',{
+			...mapGetters('pertanyaanEvaluasi',{
 				itemData: 'dataS',
 				itemDataStat: 'dataStatS'
 			}),

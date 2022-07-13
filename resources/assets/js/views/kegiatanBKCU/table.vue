@@ -554,7 +554,7 @@
 				this.$router.push({name: this.kelas + 'Detail', params: { id: id }});
 			},
 			evaluasi() {
-				this.$router.push({name:'evaluasi'});
+				this.$router.push({name:'pertanyaanEvaluasi'});
 			},
 			
 			

@@ -1,263 +1,21 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[153],{
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/views/laporanCu/itemPearls.vue?vue&type=script&lang=js&":
-/*!*********************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/assets/js/views/laporanCu/itemPearls.vue?vue&type=script&lang=js& ***!
-  \*********************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/selectCuTp.vue?vue&type=script&lang=js&":
+/*!****************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/assets/js/components/selectCuTp.vue?vue&type=script&lang=js& ***!
+  \****************************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _components_checkValue_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../components/checkValue.vue */ "./resources/assets/js/components/checkValue.vue");
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 //
 //
 //
@@ -324,21 +82,104 @@ __webpack_require__.r(__webpack_exports__);
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  components: {
-    checkValue: _components_checkValue_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
-  },
-  props: ['type', 'props'],
+  props: ['kelas', 'isPus', 'path'],
   data: function data() {
-    return {};
-  }
+    return {
+      cu_id: '',
+      tp_id: ''
+    };
+  },
+  created: function created() {
+    if (this.currentUser.id_pus !== undefined) {
+      this.fetchCU();
+
+      if (this.modelCuStat == 'success') {
+        this.fetchTp();
+      }
+    }
+  },
+  watch: {
+    '$route': function $route(to, from) {
+      // check current page meta
+      this.fetchCU();
+
+      if (this.modelCuStat == 'success') {
+        this.fetchTp();
+      }
+    },
+    modelCuStat: function modelCuStat(value) {
+      if (value === "success") {
+        this.cu_id = this.$route.params.cu;
+        this.fetchTp();
+      }
+    },
+    modelTpStat: function modelTpStat(value) {
+      if (value === "success") {
+        this.tp_id = this.$route.params.tp;
+      }
+    }
+  },
+  methods: {
+    fetchCU: function fetchCU() {
+      if (this.modelCu.length == 0) {
+        this.$store.dispatch('cu/getHeader', this.currentUser.id_pus);
+      } else {
+        this.cu_id = this.$route.params.cu;
+      }
+    },
+    fetchTp: function fetchTp() {
+      this.$store.dispatch('tp/getCu', this.cu_id);
+    },
+    changeCU: function changeCU(value) {
+      this.fetchTp();
+
+      if (this.$route.params.tp != 'semua') {
+        this.$router.push({
+          name: this.path,
+          params: {
+            cu: this.cu_id,
+            tp: this.$route.params.tp
+          }
+        });
+      } else {
+        this.$router.push({
+          name: this.path,
+          params: {
+            cu: this.cu_id,
+            tp: 'semua'
+          }
+        });
+      }
+    },
+    changeTp: function changeTp(value) {
+      this.$router.push({
+        name: this.path,
+        params: {
+          cu: this.cu_id,
+          tp: this.tp_id
+        }
+      });
+    }
+  },
+  computed: _objectSpread(_objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])('auth', {
+    currentUser: 'currentUser'
+  })), Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])('cu', {
+    modelCu: 'headerDataS',
+    modelCuStat: 'headerDataStatS',
+    updateMessage: 'update',
+    updateStat: 'updateStat'
+  })), Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])('tp', {
+    modelTp: 'dataS',
+    modelTpStat: 'dataStatS'
+  }))
 });
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/views/laporanCu/itemPearls.vue?vue&type=template&id=46256325&":
-/*!*************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/assets/js/views/laporanCu/itemPearls.vue?vue&type=template&id=46256325& ***!
-  \*************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/selectCuTp.vue?vue&type=template&id=3ea02a01&":
+/*!********************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/assets/js/components/selectCuTp.vue?vue&type=template&id=3ea02a01& ***!
+  \********************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -351,711 +192,254 @@ var render = function () {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _vm.type == "p1"
-      ? _c("div", { staticClass: "d-flex align-items-center" }, [
-          _c("div", { staticClass: "mr-3" }, [
-            _c(
-              "button",
-              {
-                staticClass: "btn rounded-round btn-icon btn-xs",
-                class: {
-                  "btn-primary": _vm.props.p1 >= 1,
-                  "btn-danger": _vm.props.p1 < 1,
+    _c("div", { staticClass: "card d-print-none" }, [
+      _c("div", { staticClass: "card-body" }, [
+        _c("div", { staticClass: "row" }, [
+          _vm.currentUser.id_cu == 0
+            ? _c(
+                "div",
+                {
+                  staticClass: "mb-2",
+                  class: {
+                    "col-md-6": _vm.cu_id != "semua",
+                    "col-md-12": _vm.cu_id == "semua",
+                  },
                 },
-                attrs: { type: "button" },
-              },
-              [_vm._v("\n\t\t\t\tP1\n\t\t\t")]
-            ),
-          ]),
-          _vm._v(" "),
-          _c("div", [
-            _c(
-              "a",
-              {
-                staticClass:
-                  "text-default font-weight-semibold letter-icon-title",
-              },
-              [
-                _c("check-value", {
-                  attrs: { value: _vm.props.p1, valueType: "percentage" },
-                }),
-              ],
-              1
-            ),
-            _vm._v(" "),
-            _c("div", { staticClass: "font-size-sm" }, [
-              _vm.props.p1 >= 1
-                ? _c("span", [_vm._v("IDEAL")])
-                : _c("span", [_vm._v("TIDAK IDEAL")]),
-            ]),
-          ]),
-        ])
-      : _vm.type == "p2"
-      ? _c("div", { staticClass: "d-flex align-items-center" }, [
-          _c("div", { staticClass: "mr-3" }, [
-            _c(
-              "button",
-              {
-                staticClass: "btn rounded-round btn-icon btn-xs",
-                class: {
-                  "btn-primary": _vm.props.p2 > 0.35,
-                  "btn-danger": _vm.props.p2 <= 0.35,
-                },
-                attrs: { type: "button" },
-              },
-              [_c("span", { staticClass: "letter-icon" }, [_vm._v("P2")])]
-            ),
-          ]),
-          _vm._v(" "),
-          _c("div", [
-            _c(
-              "a",
-              {
-                staticClass:
-                  "text-default font-weight-semibold letter-icon-title",
-              },
-              [
-                _c("check-value", {
-                  attrs: { value: _vm.props.p2, valueType: "percentage" },
-                }),
-              ],
-              1
-            ),
-            _vm._v(" "),
-            _c("div", { staticClass: "font-size-sm" }, [
-              _vm.props.p2 > 0.35
-                ? _c("span", [_vm._v("IDEAL")])
-                : _c("span", [_vm._v("TIDAK IDEAL")]),
-            ]),
-          ]),
-        ])
-      : _vm.type == "e1"
-      ? _c("div", { staticClass: "d-flex align-items-center" }, [
-          _c("div", { staticClass: "mr-3" }, [
-            _c(
-              "button",
-              {
-                staticClass: "btn rounded-round btn-icon btn-xs",
-                class: {
-                  "btn-primary": _vm.props.e1 >= 0.7 && _vm.props.e1 <= 0.8,
-                  "btn-danger": _vm.props.e1 < 0.7 || _vm.props.e1 > 0.8,
-                },
-                attrs: { type: "button" },
-              },
-              [_c("span", { staticClass: "letter-icon" }, [_vm._v("E1")])]
-            ),
-          ]),
-          _vm._v(" "),
-          _c("div", [
-            _c(
-              "a",
-              {
-                staticClass:
-                  "text-default font-weight-semibold letter-icon-title",
-              },
-              [
-                _c("check-value", {
-                  attrs: { value: _vm.props.e1, valueType: "percentage" },
-                }),
-              ],
-              1
-            ),
-            _vm._v(" "),
-            _c("div", { staticClass: "font-size-sm" }, [
-              _vm.props.e1 >= 0.7 && _vm.props.e1 <= 0.8
-                ? _c("span", [_vm._v("IDEAL")])
-                : _c("span", [_vm._v("TIDAK IDEAL")]),
-            ]),
-          ]),
-        ])
-      : _vm.type == "e5"
-      ? _c("div", { staticClass: "d-flex align-items-center" }, [
-          _c("div", { staticClass: "mr-3" }, [
-            _c(
-              "button",
-              {
-                staticClass: "btn rounded-round btn-icon btn-xs",
-                class: {
-                  "btn-primary": _vm.props.e5 >= 0.7 && _vm.props.e5 <= 0.8,
-                  "btn-danger": _vm.props.e5 < 0.7 || _vm.props.e5 > 0.8,
-                },
-                attrs: { type: "button" },
-              },
-              [_c("span", { staticClass: "letter-icon" }, [_vm._v("E5")])]
-            ),
-          ]),
-          _vm._v(" "),
-          _c("div", [
-            _c(
-              "a",
-              {
-                staticClass:
-                  "text-default font-weight-semibold letter-icon-title",
-              },
-              [
-                _c("check-value", {
-                  attrs: { value: _vm.props.e5, valueType: "percentage" },
-                }),
-              ],
-              1
-            ),
-            _vm._v(" "),
-            _c("div", { staticClass: "font-size-sm" }, [
-              _vm.props.e5 >= 0.7 && _vm.props.e5 <= 0.8
-                ? _c("span", [_vm._v("IDEAL")])
-                : _c("span", [_vm._v("TIDAK IDEAL")]),
-            ]),
-          ]),
-        ])
-      : _vm.type == "e6"
-      ? _c("div", { staticClass: "d-flex align-items-center" }, [
-          _c("div", { staticClass: "mr-3" }, [
-            _c(
-              "button",
-              {
-                staticClass: "btn rounded-round btn-icon btn-xs",
-                class: {
-                  "btn-primary": _vm.props.e6 <= 0.05,
-                  "btn-danger": _vm.props.e6 > 0.05,
-                },
-                attrs: { type: "button" },
-              },
-              [_c("span", { staticClass: "letter-icon" }, [_vm._v("E6")])]
-            ),
-          ]),
-          _vm._v(" "),
-          _c("div", [
-            _c(
-              "a",
-              {
-                staticClass:
-                  "text-default font-weight-semibold letter-icon-title",
-              },
-              [
-                _c("check-value", {
-                  attrs: { value: _vm.props.e6, valueType: "percentage" },
-                }),
-              ],
-              1
-            ),
-            _vm._v(" "),
-            _c("div", { staticClass: "font-size-sm" }, [
-              _vm.props.e6 <= 0.05
-                ? _c("span", [_vm._v("IDEAL")])
-                : _c("span", [_vm._v("TIDAK IDEAL")]),
-            ]),
-          ]),
-        ])
-      : _vm.type == "e7"
-      ? _c("div", { staticClass: "d-flex align-items-center" }, [
-          _c("div", { staticClass: "mr-3" }, [
-            _c(
-              "button",
-              {
-                staticClass: "btn rounded-round btn-icon btn-xs",
-                class: {
-                  "btn-primary": _vm.props.e7 >= 0.1 && _vm.props.e7 <= 0.2,
-                  "btn-danger": _vm.props.e7 < 0.1 || _vm.props.e7 > 0.2,
-                },
-                attrs: { type: "button" },
-              },
-              [_c("span", { staticClass: "letter-icon" }, [_vm._v("E7")])]
-            ),
-          ]),
-          _vm._v(" "),
-          _c("div", [
-            _c(
-              "a",
-              {
-                staticClass:
-                  "text-default font-weight-semibold letter-icon-title",
-              },
-              [
-                _c("check-value", {
-                  attrs: { value: _vm.props.e7, valueType: "percentage" },
-                }),
-              ],
-              1
-            ),
-            _vm._v(" "),
-            _c("div", { staticClass: "font-size-sm" }, [
-              _vm.props.e7 >= 0.1 && _vm.props.e7 <= 0.2
-                ? _c("span", [_vm._v("IDEAL")])
-                : _c("span", [_vm._v("TIDAK IDEAL")]),
-            ]),
-          ]),
-        ])
-      : _vm.type == "e9"
-      ? _c("div", { staticClass: "d-flex align-items-center" }, [
-          _c("div", { staticClass: "mr-3" }, [
-            _c(
-              "button",
-              {
-                staticClass: "btn rounded-round btn-icon btn-xs",
-                class: {
-                  "btn-primary": _vm.props.e9 >= 0.1,
-                  "btn-danger": _vm.props.e9 < 0.1,
-                },
-                attrs: { type: "button" },
-              },
-              [_c("span", { staticClass: "letter-icon" }, [_vm._v("E9")])]
-            ),
-          ]),
-          _vm._v(" "),
-          _c("div", [
-            _c(
-              "a",
-              {
-                staticClass:
-                  "text-default font-weight-semibold letter-icon-title",
-              },
-              [
-                _c("check-value", {
-                  attrs: { value: _vm.props.e9, valueType: "percentage" },
-                }),
-              ],
-              1
-            ),
-            _vm._v(" "),
-            _c("div", { staticClass: "font-size-sm" }, [
-              _vm.props.e9 >= 0.1
-                ? _c("span", [_vm._v("IDEAL")])
-                : _c("span", [_vm._v("TIDAK IDEAL")]),
-            ]),
-          ]),
-        ])
-      : _vm.type == "a1"
-      ? _c("div", { staticClass: "d-flex align-items-center" }, [
-          _c("div", { staticClass: "mr-3" }, [
-            _c(
-              "button",
-              {
-                staticClass: "btn rounded-round btn-icon btn-xs",
-                class: {
-                  "btn-primary": _vm.props.a1 <= 0.05,
-                  "btn-danger": _vm.props.a1 > 0.05,
-                },
-                attrs: { type: "button" },
-              },
-              [_c("span", { staticClass: "letter-icon" }, [_vm._v("A1")])]
-            ),
-          ]),
-          _vm._v(" "),
-          _c("div", [
-            _c(
-              "a",
-              {
-                staticClass:
-                  "text-default font-weight-semibold letter-icon-title",
-              },
-              [
-                _c("check-value", {
-                  attrs: { value: _vm.props.a1, valueType: "percentage" },
-                }),
-              ],
-              1
-            ),
-            _vm._v(" "),
-            _c("div", { staticClass: "font-size-sm" }, [
-              _vm.props.a1 <= 0.05
-                ? _c("span", [_vm._v("IDEAL")])
-                : _c("span", [_vm._v("TIDAK IDEAL")]),
-            ]),
-          ]),
-        ])
-      : _vm.type == "a2"
-      ? _c("div", { staticClass: "d-flex align-items-center" }, [
-          _c("div", { staticClass: "mr-3" }, [
-            _c(
-              "button",
-              {
-                staticClass: "btn rounded-round btn-icon btn-xs",
-                class: {
-                  "btn-primary": _vm.props.a2 < 0.05,
-                  "btn-danger": _vm.props.a2 >= 0.05,
-                },
-                attrs: { type: "button" },
-              },
-              [_c("span", { staticClass: "letter-icon" }, [_vm._v("A2")])]
-            ),
-          ]),
-          _vm._v(" "),
-          _c("div", [
-            _c(
-              "a",
-              {
-                staticClass:
-                  "text-default font-weight-semibold letter-icon-title",
-              },
-              [
-                _c("check-value", {
-                  attrs: { value: _vm.props.a2, valueType: "percentage" },
-                }),
-              ],
-              1
-            ),
-            _vm._v(" "),
-            _c("div", { staticClass: "font-size-sm" }, [
-              _vm.props.a2 < 0.05
-                ? _c("span", [_vm._v("IDEAL")])
-                : _c("span", [_vm._v("TIDAK IDEAL")]),
-            ]),
-          ]),
-        ])
-      : _vm.type == "r7"
-      ? _c("div", { staticClass: "d-flex align-items-center" }, [
-          _vm.props.simpanan_saham_des != 0 &&
-          _vm.props.simpanan_saham_lalu != 0
-            ? _c("div", { staticClass: "d-flex align-items-center" }, [
-                _c("div", { staticClass: "mr-3" }, [
-                  _c(
-                    "button",
-                    {
-                      staticClass: "btn rounded-round btn-icon btn-xs",
-                      class: {
-                        "btn-primary": _vm.props.r7_1 == _vm.props.harga_pasar,
-                        "btn-danger": _vm.props.r7_1 != _vm.props.harga_pasar,
-                      },
-                      attrs: { type: "button" },
-                    },
-                    [_c("span", { staticClass: "letter-icon" }, [_vm._v("R7")])]
-                  ),
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "media-body pr-10" }, [
-                  _c(
-                    "a",
-                    {
-                      staticClass:
-                        "text-default font-weight-semibold letter-icon-title",
-                    },
-                    [
-                      _c("check-value", {
+                [
+                  _c("div", { staticClass: "input-group" }, [
+                    _vm._m(0),
+                    _vm._v(" "),
+                    _c(
+                      "select",
+                      {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.cu_id,
+                            expression: "cu_id",
+                          },
+                        ],
+                        staticClass: "form-control",
                         attrs: {
-                          value: _vm.props.r7_1,
-                          valueType: "percentage",
+                          name: "cu_id",
+                          "data-width": "100%",
+                          disabled: _vm.modelCuStat === "loading",
                         },
-                      }),
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "font-size-sm" }, [
-                    _vm.props.r7_1 == _vm.props.harga_pasar
-                      ? _c("span", [_vm._v("IDEAL")])
-                      : _c("span", [_vm._v("TIDAK IDEAL")]),
-                  ]),
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "mr-3" }, [
-                  _c(
-                    "button",
-                    {
-                      staticClass: "btn rounded-round btn-icon btn-xs",
-                      class: {
-                        "btn-primary": _vm.props.r7_2 == _vm.props.harga_pasar,
-                        "btn-danger": _vm.props.r7_2 != _vm.props.harga_pasar,
+                        on: {
+                          change: [
+                            function ($event) {
+                              var $$selectedVal = Array.prototype.filter
+                                .call($event.target.options, function (o) {
+                                  return o.selected
+                                })
+                                .map(function (o) {
+                                  var val = "_value" in o ? o._value : o.value
+                                  return val
+                                })
+                              _vm.cu_id = $event.target.multiple
+                                ? $$selectedVal
+                                : $$selectedVal[0]
+                            },
+                            function ($event) {
+                              return _vm.changeCU($event.target.value)
+                            },
+                          ],
+                        },
                       },
-                      attrs: { type: "button" },
-                    },
-                    [_c("span", { staticClass: "letter-icon" }, [_vm._v("R7")])]
-                  ),
-                ]),
-                _vm._v(" "),
-                _c("div", [
-                  _c(
-                    "a",
-                    {
-                      staticClass:
-                        "text-default font-weight-semibold letter-icon-title",
-                    },
-                    [
-                      _c("check-value", {
-                        attrs: {
-                          value: _vm.props.r7_2,
-                          valueType: "percentage",
+                      [
+                        _c("option", { attrs: { disabled: "", value: "" } }, [
+                          _vm._v("Silahkan pilih CU"),
+                        ]),
+                        _vm._v(" "),
+                        _vm._t("default"),
+                        _vm._v(" "),
+                        _c("option", { attrs: { value: "semua" } }, [
+                          _vm._v("Semua CU"),
+                        ]),
+                        _vm._v(" "),
+                        _vm.isPus
+                          ? _c("option", { attrs: { value: "0" } }, [
+                              _vm.currentUser.pus
+                                ? _c("span", [
+                                    _vm._v(_vm._s(_vm.currentUser.pus.name)),
+                                  ])
+                                : _c("span", [_vm._v("PUSKOPCUINA")]),
+                            ])
+                          : _vm._e(),
+                        _vm._v(" "),
+                        _c("option", { attrs: { disabled: "", value: "" } }, [
+                          _vm._v("----------------"),
+                        ]),
+                        _vm._v(" "),
+                        _vm._l(_vm.modelCu, function (cu) {
+                          return cu
+                            ? _c("option", { domProps: { value: cu.id } }, [
+                                _vm._v(_vm._s(cu.name)),
+                              ])
+                            : _vm._e()
+                        }),
+                      ],
+                      2
+                    ),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "input-group-append" }, [
+                      _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-light",
+                          attrs: { disabled: _vm.modelCuStat === "loading" },
+                          on: { click: _vm.fetchCU },
                         },
-                      }),
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "font-size-sm" }, [
-                    _vm.props.r7_2 == _vm.props.harga_pasar
-                      ? _c("span", [_vm._v("IDEAL")])
-                      : _c("span", [_vm._v("TIDAK IDEAL")]),
+                        [
+                          _c("i", {
+                            staticClass: "icon-sync",
+                            class: { spinner: _vm.modelCuStat === "loading" },
+                          }),
+                        ]
+                      ),
+                    ]),
                   ]),
-                ]),
-              ])
-            : _c("div", { staticClass: "d-flex align-items-center" }, [
-                _c("div", { staticClass: "mr-3" }, [
-                  _c(
-                    "button",
-                    {
-                      staticClass: "btn rounded-round btn-icon btn-xs",
-                      class: {
-                        "btn-primary": _vm.props.r7_1 == _vm.props.harga_pasar,
-                        "btn-danger": _vm.props.r7_1 != _vm.props.harga_pasar,
+                ]
+              )
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.cu_id != "semua"
+            ? _c(
+                "div",
+                {
+                  class: {
+                    "col-md-6": _vm.currentUser.id_cu == 0,
+                    "col-md-12": _vm.currentUser.id_cu != 0,
+                  },
+                },
+                [
+                  _c("div", { staticClass: "input-group" }, [
+                    _vm._m(1),
+                    _vm._v(" "),
+                    _c(
+                      "select",
+                      {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.tp_id,
+                            expression: "tp_id",
+                          },
+                        ],
+                        staticClass: "form-control",
+                        attrs: {
+                          name: "tp",
+                          "data-width": "100%",
+                          disabled: _vm.modelTpStat === "loading",
+                        },
+                        on: {
+                          change: [
+                            function ($event) {
+                              var $$selectedVal = Array.prototype.filter
+                                .call($event.target.options, function (o) {
+                                  return o.selected
+                                })
+                                .map(function (o) {
+                                  var val = "_value" in o ? o._value : o.value
+                                  return val
+                                })
+                              _vm.tp_id = $event.target.multiple
+                                ? $$selectedVal
+                                : $$selectedVal[0]
+                            },
+                            function ($event) {
+                              return _vm.changeTp($event.target.value)
+                            },
+                          ],
+                        },
                       },
-                      attrs: { type: "button" },
-                    },
-                    [_c("span", { staticClass: "letter-icon" }, [_vm._v("R7")])]
-                  ),
-                ]),
-                _vm._v(" "),
-                _c("div", [
-                  _c(
-                    "a",
-                    {
-                      staticClass:
-                        "text-default font-weight-semibold letter-icon-title",
-                    },
-                    [
-                      _c("check-value", {
-                        attrs: {
-                          value: _vm.props.r7_1,
-                          valueType: "percentage",
+                      [
+                        _c("option", { attrs: { disabled: "", value: "" } }, [
+                          _vm._v("Silahkan pilih TP/KP"),
+                        ]),
+                        _vm._v(" "),
+                        _c("option", { attrs: { value: "semua" } }, [
+                          _vm._v("Semua Tp"),
+                        ]),
+                        _vm._v(" "),
+                        _c("option", { attrs: { disabled: "", value: "" } }, [
+                          _vm._v("----------------"),
+                        ]),
+                        _vm._v(" "),
+                        _vm._l(_vm.modelTp, function (tp) {
+                          return tp
+                            ? _c("option", { domProps: { value: tp.id } }, [
+                                _vm._v(_vm._s(tp.name)),
+                              ])
+                            : _vm._e()
+                        }),
+                      ],
+                      2
+                    ),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "input-group-append" }, [
+                      _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-light",
+                          attrs: { disabled: _vm.modelTpStat === "loading" },
+                          on: { click: _vm.fetchTp },
                         },
-                      }),
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "font-size-sm" }, [
-                    _vm.props.r7_1 == _vm.props.harga_pasar
-                      ? _c("span", [_vm._v("IDEAL")])
-                      : _c("span", [_vm._v("TIDAK IDEAL")]),
+                        [
+                          _c("i", {
+                            staticClass: "icon-sync",
+                            class: { spinner: _vm.modelTpStat === "loading" },
+                          }),
+                        ]
+                      ),
+                    ]),
                   ]),
-                ]),
-              ]),
-        ])
-      : _vm.type == "r9"
-      ? _c("div", { staticClass: "d-flex align-items-center" }, [
-          _c("div", { staticClass: "mr-3" }, [
-            _c(
-              "button",
-              {
-                staticClass: "btn rounded-round btn-icon btn-xs",
-                class: {
-                  "btn-primary": _vm.props.r9 <= 0.05,
-                  "btn-danger": _vm.props.r9 > 0.05,
-                },
-                attrs: { type: "button" },
-              },
-              [_c("span", { staticClass: "letter-icon" }, [_vm._v("R9")])]
-            ),
-          ]),
-          _vm._v(" "),
-          _c("div", [
-            _c(
-              "a",
-              {
-                staticClass:
-                  "text-default font-weight-semibold letter-icon-title",
-              },
-              [
-                _c("check-value", {
-                  attrs: { value: _vm.props.r9, valueType: "percentage" },
-                }),
-              ],
-              1
-            ),
-            _vm._v(" "),
-            _c("div", { staticClass: "font-size-sm" }, [
-              _vm.props.r9 <= 0.05
-                ? _c("span", [_vm._v("IDEAL")])
-                : _c("span", [_vm._v("TIDAK IDEAL")]),
-            ]),
-          ]),
-        ])
-      : _vm.type == "l1"
-      ? _c("div", { staticClass: "d-flex align-items-center" }, [
-          _c("div", { staticClass: "mr-3" }, [
-            _c(
-              "button",
-              {
-                staticClass: "btn rounded-round btn-icon btn-xs",
-                class: {
-                  "btn-primary": _vm.props.l1 >= 0.15 && _vm.props.l1 <= 0.2,
-                  "btn-danger": _vm.props.l1 < 0.15 || _vm.props.l1 > 0.2,
-                },
-                attrs: { type: "button" },
-              },
-              [_c("span", { staticClass: "letter-icon" }, [_vm._v("L1")])]
-            ),
-          ]),
-          _vm._v(" "),
-          _c("div", [
-            _c(
-              "a",
-              {
-                staticClass:
-                  "text-default font-weight-semibold letter-icon-title",
-              },
-              [
-                _c("check-value", {
-                  attrs: { value: _vm.props.l1, valueType: "percentage" },
-                }),
-              ],
-              1
-            ),
-            _vm._v(" "),
-            _c("div", { staticClass: "font-size-sm" }, [
-              _vm.props.l1 >= 0.15 && _vm.props.l1 <= 0.2
-                ? _c("span", [_vm._v("IDEAL")])
-                : _c("span", [_vm._v("TIDAK IDEAL")]),
-            ]),
-          ]),
-        ])
-      : _vm.type == "l2"
-      ? _c("div", { staticClass: "d-flex align-items-center" }, [
-          _c("div", { staticClass: "mr-3" }, [
-            _c(
-              "button",
-              {
-                staticClass: "btn rounded-round btn-icon btn-xs",
-                class: {
-                  "btn-primary": _vm.props.l2 >= 0.15 && _vm.props.l2 <= 0.2,
-                  "btn-danger": _vm.props.l2 < 0.15 || _vm.props.l2 > 0.2,
-                },
-                attrs: { type: "button" },
-              },
-              [_c("span", { staticClass: "letter-icon" }, [_vm._v("L2")])]
-            ),
-          ]),
-          _vm._v(" "),
-          _c("div", [
-            _c(
-              "a",
-              {
-                staticClass:
-                  "text-default font-weight-semibold letter-icon-title",
-              },
-              [
-                _c("check-value", {
-                  attrs: { value: _vm.props.l2, valueType: "percentage" },
-                }),
-              ],
-              1
-            ),
-            _vm._v(" "),
-            _c("div", { staticClass: "font-size-sm" }, [
-              _vm.props.l2 >= 0.15 && _vm.props.l2 <= 0.2
-                ? _c("span", [_vm._v("IDEAL")])
-                : _c("span", [_vm._v("TIDAK IDEAL")]),
-            ]),
-          ]),
-        ])
-      : _vm.type == "s10"
-      ? _c("div", { staticClass: "d-flex align-items-center" }, [
-          _vm.props && _vm.props.s10
-            ? _c("div", { staticClass: "mr-3" }, [
-                _c(
-                  "button",
-                  {
-                    staticClass: "btn rounded-round btn-icon btn-xs",
-                    class: {
-                      "btn-primary": _vm.props.s10 > 0.12,
-                      "btn-danger": _vm.props.s10 <= 0.12,
-                    },
-                    attrs: { type: "button" },
-                  },
-                  [_c("span", { staticClass: "letter-icon" }, [_vm._v("S10")])]
-                ),
-              ])
+                ]
+              )
             : _vm._e(),
-          _vm._v(" "),
-          _vm.props && _vm.props.s10
-            ? _c("div", [
-                _c(
-                  "a",
-                  {
-                    staticClass:
-                      "text-default font-weight-semibold letter-icon-title",
-                  },
-                  [
-                    _c("check-value", {
-                      attrs: { value: _vm.props.s10, valueType: "percentage" },
-                    }),
-                  ],
-                  1
-                ),
-                _vm._v(" "),
-                _c("div", { staticClass: "font-size-sm" }, [
-                  _vm.props.s10 > 0.12
-                    ? _c("span", [_vm._v("IDEAL")])
-                    : _c("span", [_vm._v("TIDAK IDEAL")]),
-                ]),
-              ])
-            : _vm._e(),
-        ])
-      : _vm.type == "s11"
-      ? _c("div", { staticClass: "d-flex align-items-center" }, [
-          _vm.props && _vm.props.s11
-            ? _c("div", { staticClass: "mr-3" }, [
-                _c(
-                  "button",
-                  {
-                    staticClass: "btn rounded-round btn-icon btn-xs",
-                    class: {
-                      "btn-primary":
-                        _vm.props.s11 > 0.1 + _vm.props.laju_inflasi,
-                      "btn-danger":
-                        _vm.props.s11 <= 0.1 + _vm.props.laju_inflasi,
-                    },
-                    attrs: { type: "button" },
-                  },
-                  [_c("span", { staticClass: "letter-icon" }, [_vm._v("S11")])]
-                ),
-              ])
-            : _vm._e(),
-          _vm._v(" "),
-          _vm.props && _vm.props.s11
-            ? _c("div", [
-                _c(
-                  "a",
-                  {
-                    staticClass:
-                      "text-default font-weight-semibold letter-icon-title",
-                  },
-                  [
-                    _c("check-value", {
-                      attrs: { value: _vm.props.s11, valueType: "percentage" },
-                    }),
-                  ],
-                  1
-                ),
-                _vm._v(" "),
-                _c("div", { staticClass: "font-size-sm" }, [
-                  _vm.props.s11 > 0.1 + _vm.props.laju_inflasi
-                    ? _c("span", [_vm._v("IDEAL")])
-                    : _c("span", [_vm._v("TIDAK IDEAL")]),
-                ]),
-              ])
-            : _vm._e(),
-        ])
-      : _vm._e(),
+        ]),
+      ]),
+    ]),
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "input-group-prepend" }, [
+      _c("span", { staticClass: "input-group-text" }, [_vm._v("Pilih CU")]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", { staticClass: "input-group-prepend" }, [
+      _c("span", { staticClass: "input-group-text" }, [_vm._v("Pilih TP/KP")]),
+    ])
+  },
+]
 render._withStripped = true
 
 
 
 /***/ }),
 
-/***/ "./resources/assets/js/views/laporanCu/itemPearls.vue":
-/*!************************************************************!*\
-  !*** ./resources/assets/js/views/laporanCu/itemPearls.vue ***!
-  \************************************************************/
+/***/ "./resources/assets/js/components/selectCuTp.vue":
+/*!*******************************************************!*\
+  !*** ./resources/assets/js/components/selectCuTp.vue ***!
+  \*******************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _itemPearls_vue_vue_type_template_id_46256325___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./itemPearls.vue?vue&type=template&id=46256325& */ "./resources/assets/js/views/laporanCu/itemPearls.vue?vue&type=template&id=46256325&");
-/* harmony import */ var _itemPearls_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./itemPearls.vue?vue&type=script&lang=js& */ "./resources/assets/js/views/laporanCu/itemPearls.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* harmony import */ var _selectCuTp_vue_vue_type_template_id_3ea02a01___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./selectCuTp.vue?vue&type=template&id=3ea02a01& */ "./resources/assets/js/components/selectCuTp.vue?vue&type=template&id=3ea02a01&");
+/* harmony import */ var _selectCuTp_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./selectCuTp.vue?vue&type=script&lang=js& */ "./resources/assets/js/components/selectCuTp.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
@@ -1064,9 +448,9 @@ __webpack_require__.r(__webpack_exports__);
 /* normalize component */
 
 var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _itemPearls_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _itemPearls_vue_vue_type_template_id_46256325___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _itemPearls_vue_vue_type_template_id_46256325___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _selectCuTp_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _selectCuTp_vue_vue_type_template_id_3ea02a01___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _selectCuTp_vue_vue_type_template_id_3ea02a01___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
   null,
@@ -1076,38 +460,38 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/assets/js/views/laporanCu/itemPearls.vue"
+component.options.__file = "resources/assets/js/components/selectCuTp.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/assets/js/views/laporanCu/itemPearls.vue?vue&type=script&lang=js&":
-/*!*************************************************************************************!*\
-  !*** ./resources/assets/js/views/laporanCu/itemPearls.vue?vue&type=script&lang=js& ***!
-  \*************************************************************************************/
+/***/ "./resources/assets/js/components/selectCuTp.vue?vue&type=script&lang=js&":
+/*!********************************************************************************!*\
+  !*** ./resources/assets/js/components/selectCuTp.vue?vue&type=script&lang=js& ***!
+  \********************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_itemPearls_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./itemPearls.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/views/laporanCu/itemPearls.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_itemPearls_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_selectCuTp_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./selectCuTp.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/selectCuTp.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_selectCuTp_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
-/***/ "./resources/assets/js/views/laporanCu/itemPearls.vue?vue&type=template&id=46256325&":
-/*!*******************************************************************************************!*\
-  !*** ./resources/assets/js/views/laporanCu/itemPearls.vue?vue&type=template&id=46256325& ***!
-  \*******************************************************************************************/
+/***/ "./resources/assets/js/components/selectCuTp.vue?vue&type=template&id=3ea02a01&":
+/*!**************************************************************************************!*\
+  !*** ./resources/assets/js/components/selectCuTp.vue?vue&type=template&id=3ea02a01& ***!
+  \**************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_itemPearls_vue_vue_type_template_id_46256325___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./itemPearls.vue?vue&type=template&id=46256325& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/views/laporanCu/itemPearls.vue?vue&type=template&id=46256325&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_itemPearls_vue_vue_type_template_id_46256325___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_selectCuTp_vue_vue_type_template_id_3ea02a01___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./selectCuTp.vue?vue&type=template&id=3ea02a01& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/selectCuTp.vue?vue&type=template&id=3ea02a01&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_selectCuTp_vue_vue_type_template_id_3ea02a01___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_itemPearls_vue_vue_type_template_id_46256325___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_selectCuTp_vue_vue_type_template_id_3ea02a01___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

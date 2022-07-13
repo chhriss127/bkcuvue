@@ -85,6 +85,22 @@ Route::group(['middleware' => 'throttle:60,1'], function () {
         Route::group(['middleware' => ['permission:destroy_artikel']], function () {
             Route::delete('/artikel/{id}', 'ArtikelController@destroy');
         });
+
+        // Evaluasi
+        Route::get('/evaluasiKegiatan', 'EvaluasiKegiatanController@index');
+        Route::get('/evaluasiKegiatan/create', 'EvaluasiKegiatanController@create');
+        Route::post('/evaluasiKegiatan/store', 'EvaluasiKegiatanController@store');
+        Route::get('/evaluasiKegiatan/edit/{id}', 'EvaluasiKegiatanController@edit');
+        Route::post('/evaluasiKegiatan/update/{id}', 'EvaluasiKegiatanController@update');
+        Route::delete('/evaluasiKegiatan/{id}', 'EvaluasiKegiatanController@destroy');
+
+        // pertanyaan Evaluasi
+        Route::get('/pertanyaanEvaluasi', 'PertanyaanEvaluasiController@index');
+        Route::get('/pertanyaanEvaluasi/create', 'PertanyaanEvaluasiController@create');
+        Route::post('/pertanyaanEvaluasi/store', 'PertanyaanEvaluasiController@store');
+        Route::get('/pertanyaanEvaluasi/edit/{id}', 'PertanyaanEvaluasiController@edit');
+        Route::post('/pertanyaanEvaluasi/update/{id}', 'PertanyaanEvaluasiController@update');
+        Route::delete('/pertanyaanEvaluasi/{id}', 'PertanyaanEvaluasiController@destroy');
         
         //artikel kategori
         Route::get('/artikelKategori/history', 'ArtikelKategoriController@history');
@@ -315,6 +331,22 @@ Route::group(['middleware' => 'throttle:60,1'], function () {
         Route::post('/kegiatanBKCU/storeNilai/{kegiatan_id}/{aktivis_id}/{materi_id}', 'KegiatanBKCUController@storeNilai');
         Route::post('/kegiatanBKCU/updateListMateri/{id}', 'KegiatanBKCUController@updateListMateri');
         Route::delete('/kegiatanBKCU/destroyListMateri/{kegiatan_tipe}/{id}', 'KegiatanBKCUController@destroyListMateri');
+
+        //evaluasi
+        Route::get('/evaluasiKegiatan', 'EvaluasiKegiatanController@index');
+        Route::get('/evaluasiKegiatan/create', 'EvaluasiKegiatanController@create');
+        Route::post('/evaluasiKegiatan/store', 'EvaluasiKegiatanController@store');
+        Route::get('/evaluasiKegiatan/edit/{id}', 'EvaluasiKegiatanController@edit');
+        Route::post('/evaluasiKegiatan/update/{id}', 'EvaluasiKegiatanController@update');
+        Route::delete('/evaluasiKegiatan/{id}', 'EvaluasiKegiatanController@destroy');
+
+        // pertanyaan Evaluasi
+        Route::get('/pertanyaanEvaluasi', 'PertanyaanEvaluasiController@index');
+        Route::get('/pertanyaanEvaluasi/create', 'PertanyaanEvaluasiController@create');
+        Route::post('/pertanyaanEvaluasi/store', 'PertanyaanEvaluasiController@store');
+        Route::get('/pertanyaanEvaluasi/edit/{id}', 'PertanyaanEvaluasiController@edit');
+        Route::post('/pertanyaanEvaluasi/update/{id}', 'PertanyaanEvaluasiController@update');
+        Route::delete('/pertanyaanEvaluasi/{id}', 'PertanyaanEvaluasiController@destroy');
 
         // aktivis
         Route::get('/aktivis/get/{id}', 'AktivisController@get');

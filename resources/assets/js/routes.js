@@ -12,7 +12,7 @@ const activityLog = () => import('./views/user/indexAktivitas.vue');
 const pengumuman = () => import('./views/pengumuman/index.vue');
 const notFound = () => import('./views/notFound.vue');
 const artikel = () => import('./views/artikel/index.vue');
-const evaluasiWidget = () => import('./views/evaluasiDiklat/form.vue');
+const evaluasiWidget = () => import('./views/evaluasiKegiatan/form.vue');
 const artikel_form = () => import('./views/artikel/form.vue');
 const artikelPenulis = () => import('./views/artikelPenulis/index.vue');
 const artikelPenulis_form = () => import('./views/artikelPenulis/form.vue');
@@ -37,9 +37,11 @@ const halamanBaru = () => import ('./views/halamanBaru/index.vue');
 const halamanBaru_form = () => import ('./views/halamanBaru/form.vue');
 const baruLagi = () => import ('./views/baruLagi/index.vue');
 const baruLagi_form = () => import ('./views/baruLagi/form.vue');
-const evaluasiDiklat = () => import ('./views/evaluasiDiklat/index.vue');
-const evaluasiDiklat_form = () => import ('./views/evaluasiDiklat/form.vue');
-const evaluasiDiklat2 = () => import ('./views/kegiatanBKCU/pertanyaanEvaluasi.vue');
+const evaluasiKegiatan = () => import ('./views/evaluasiKegiatan/index.vue');
+const evaluasiKegiatan_form = () => import ('./views/evaluasiKegiatan/form.vue');
+const evaluasiKegiatanDashboard = () => import ('./views/pertanyaanEvaluasi/index.vue');
+const pertanyaanEvaluasi = () => import ('./views/pertanyaanEvaluasi/index.vue');
+const pertanyaanEvaluasi_form = () => import ('./views/pertanyaanEvaluasi/form.vue');
 const tempat = () => import('./views/tempat/index.vue');
 const tempat_form = () => import('./views/tempat/form.vue');
 const cu = () => import('./views/cu/index.vue');
@@ -160,7 +162,7 @@ const routes = [
 	// dashboard
 	{ path: '/evaluasi',
 	name: 'evaluasi', 
-	components: { default: evaluasiDiklat2,'header': header, 'footer': footer },
+	components: { default: evaluasiKegiatanDashboard,'header': header, 'footer': footer },
 	meta: { requiresAuth: true }},
 
 	// evaluasiWidget
@@ -336,23 +338,42 @@ const routes = [
 	},
 
 
-	// evaluasiDiklat
+	//evaluasiDiklat
 	{
-		path: '/evaluasiDiklat',
-		name: 'evaluasiDiklat',
-		components: { default: evaluasiDiklat, 'header': header, 'footer': footer },
+		path: '/evaluasiKegiatan',
+		name: 'evaluasiKegiatan',
+		components: { default: evaluasiKegiatan, 'header': header, 'footer': footer },
 		meta: { requiresAuth: true }
 	},
 	{
-			path: '/evaluasiDiklat/create',
-			name: 'evaluasiDiklatCreate',
-			components: { default: evaluasiDiklat_form, 'header': header, 'footer': footer },
+			path: '/evaluasiKegiatan/create',
+			name: 'evaluasiKegiatanCreate',
+			components: { default: evaluasiKegiatan_form, 'header': header, 'footer': footer },
 			meta: { requiresAuth: true }
 	},
 	{
-			path: '/evaluasiDiklat/edit/:id',
-			name: 'evaluasiDiklatEdit',
-			components: { default: evaluasiDiklat_form, 'header': header, 'footer': footer },
+			path: '/evaluasiKegiatan/edit/:id',
+			name: 'evaluasiKegiatanEdit',
+			components: { default: evaluasiKegiatan_form, 'header': header, 'footer': footer },
+			meta: { requiresAuth: true, mode: 'edit' }
+	},
+	//evaluasiDiklat
+	{
+		path: '/pertanyaanEvaluasi',
+		name: 'pertanyaanEvaluasi',
+		components: { default: pertanyaanEvaluasi, 'header': header, 'footer': footer },
+		meta: { requiresAuth: true }
+	},
+	{
+			path: '/pertanyaanEvaluasi/create',
+			name: 'pertanyaanEvaluasiCreate',
+			components: { default: pertanyaanEvaluasi_form, 'header': header, 'footer': footer },
+			meta: { requiresAuth: true }
+	},
+	{
+			path: '/pertanyaanEvaluasi/edit/:id',
+			name: 'pertanyaanEvaluasiEdit',
+			components: { default: pertanyaanEvaluasi_form, 'header': header, 'footer': footer },
 			meta: { requiresAuth: true, mode: 'edit' }
 	},
 

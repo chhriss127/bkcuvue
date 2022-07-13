@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<!-- page-header -->
-		<page-header :title="title" :titleDesc="titleDesc" :titleIcon="titleIcon" :level="level" :level2Title="level2Title" :level2Route="kelas" @level2Back="back()"></page-header>
+		<page-header :title="title" :titleDesc="titleDesc" :titleIcon="titleIcon" :level="level" :level2Title="level2Title" :level2Route="kelas" @level2Back="back()" ></page-header>
 
 		<!-- content -->
 		<div class="page-content pt-0">
@@ -24,37 +24,37 @@
 
 									<!-- nama -->
 									<div class="col-md-6">
-										<div class="form-group" :class="{'has-error' : errors.has('form.nama')}">
+										<div class="form-group" :class="{'has-error' : errors.has('form.name')}">
 
 											<!-- title -->
-											<h5 :class="{ 'text-danger' : errors.has('form.nama')}">
-												<i class="icon-cross2" v-if="errors.has('form.nama')"></i>
+											<h5 :class="{ 'text-danger' : errors.has('form.name')}">
+												<i class="icon-cross2" v-if="errors.has('form.name')"></i>
 												Nama: <wajib-badge></wajib-badge></h5>
 
 											<!-- text -->
-											<input type="text" name="nama" class="form-control" placeholder="Silahkan masukkan nama anda" v-validate="'required|min:5'" data-vv-as="nama" v-model="form.nama">
+											<input type="text" name="name" class="form-control" placeholder="Silahkan masukkan nama anda" v-validate="'required|min:5'" data-vv-as="name" v-model="form.name">
 											
 
 											<!-- error message -->
-											<small class="text-muted text-danger" v-if="errors.has('form.nama')">
-												<i class="icon-arrow-small-right"></i> {{ errors.first('form.nama') }}
+											<small class="text-muted text-danger" v-if="errors.has('form.name')">
+												<i class="icon-arrow-small-right"></i> {{ errors.first('form.name') }}
 											</small>
 											<small class="text-muted" v-else>&nbsp;</small>
 										</div>
 									
 
 									<!-- credit union -->
-										<div class="form-group" :class="{'has-error' : errors.has('form.comment')}">
+										<div class="form-group" :class="{'has-error' : errors.has('form.cu')}">
 
-											<h5 :class="{ 'text-danger' : errors.has('form.comment')}">
-													<i class="icon-cross2" v-if="errors.has('form.comment')"></i>
+											<h5 :class="{ 'text-danger' : errors.has('form.cu')}">
+													<i class="icon-cross2" v-if="errors.has('form.cu')"></i>
 													Credit Union: <wajib-badge></wajib-badge></h5>
 
-											<template v-for="(cu,index) in modelCu">
+											<!-- <template v-for="(cu,index) in modelCu">
 												<router-link :to="{ name: 'anggotaCuCu', params:{cu: cu.id, tp: 'semua'} }" class="dropdown-item" active-class="active" exact v-if="cu" :key="index">
 													CU {{ cu.name }}
 												</router-link>
-											</template>
+											</template> -->
 
 											
 											<!-- <select class="form-control" name="id_cu" v-model="form.anggota_cu.id_cu" data-width="100%" v-validate="'required'" data-vv-as="CU" :disabled="modelCu.length == 0">
@@ -63,8 +63,8 @@
 													<span v-else>Silahkan pilih CU</span>
 												</option>
 												<option v-for="(cu, index) in modelCu" :value="cu.id" :key="index">{{cu.name}}</option>
-											</select>  -->
-											<anggotaCu></anggotaCu>
+											</select> 
+											<anggotaCu></anggotaCu> -->
 											
 										</div>
 									</div>
@@ -84,45 +84,50 @@
 								</div>
 							</div>
 
-							<div class="card-body">	
-								<div class="row">
-									<div class="col-md-6">
+							<div class="card-body"  v-for="datas in this.itemData.data"  >	
+								
+									<div class="row" >
+										<div class="col-md-6">
 
-										<label :class="{ 'text-danger' : errors.has('form.comment')}">
-										<i class="icon-cross2" v-if="errors.has('form.comment')"></i>
-										tempat pertanyaan <wajib-badge></wajib-badge></label>
+											<label :class="{ 'text-danger' : errors.has('form.pertanyaan')}">
+												<i class="icon-cross2" v-if="errors.has('form.pertanyaan')"></i>
+													{{ datas.pertanyaan}}
+												<wajib-badge></wajib-badge>
 
-										<br>
+												<div >
 
-										<div class="form-check form-check-inline">
-											<label class="form-check-label" for="inlineCheckbox1">Kurang Sekali</label>
-										</div>
-										<div class="form-check form-check-inline">
-											<input type="radio" class="form-check-input" id="radio1" name="optradio" value="option1" >
-											<label class="form-check-label" for="inlineCheckbox1">1</label>
-										</div>
-										<div class="form-check form-check-inline">
-											<input type="radio" class="form-check-input" id="radio1" name="optradio" value="option1" >
-											<label class="form-check-label" for="inlineCheckbox2">2</label>
-										</div>
-										<div class="form-check form-check-inline">
-											<input type="radio" class="form-check-input" id="radio1" name="optradio" value="option1" >
-											<label class="form-check-label" for="inlineCheckbox3">3</label>
-										</div>
-										<div class="form-check form-check-inline">
-											<input type="radio" class="form-check-input" id="radio1" name="optradio" value="option1" >
-											<label class="form-check-label" for="inlineCheckbox3">4</label>
-										</div>
-										<div class="form-check form-check-inline">
-											<input type="radio" class="form-check-input" id="radio1" name="optradio" value="option1" >
-											<label class="form-check-label" for="inlineCheckbox3">5</label>
-										</div>
-										<div class="form-check form-check-inline">
-											
-											<label class="form-check-label" for="inlineCheckbox1">Baik Sekali</label>
+													<div class="form-check form-check-inline">
+														<label class="form-check-label" for="inlineCheckbox1">Kurang Sekali</label>
+													</div>
+													<div class="form-check form-check-inline">
+														<input type="radio" class="form-check-input" id="radio1" name="form.pertanyaan" value="option1" >
+														<label class="form-check-label" for="inlineCheckbox1">1</label>
+													</div>
+													<div class="form-check form-check-inline">
+														<input type="radio" class="form-check-input" id="radio1" name="form.pertanyaan" value="option1" >
+														<label class="form-check-label" for="inlineCheckbox2">2</label>
+													</div>
+													<div class="form-check form-check-inline">
+														<input type="radio" class="form-check-input" id="radio1" name="form.pertanyaan" value="option1" >
+														<label class="form-check-label" for="inlineCheckbox3">3</label>
+													</div>
+													<div class="form-check form-check-inline">
+														<input type="radio" class="form-check-input" id="radio1" name="form.pertanyaan" value="option1" >
+														<label class="form-check-label" for="inlineCheckbox3">4</label>
+													</div>
+													<div class="form-check form-check-inline">
+														<input type="radio" class="form-check-input" id="radio1" name="form.pertanyaan" value="option1" >
+														<label class="form-check-label" for="inlineCheckbox3">5</label>
+													</div>
+													<div class="form-check form-check-inline">
+														
+														<label class="form-check-label" for="inlineCheckbox1">Baik Sekali</label>
+													</div>
+												</div>	
+											</label>
 										</div>
 									</div>
-								</div>
+								
 							</div>
 						</div>
 
@@ -141,9 +146,9 @@
 							<div class="card-body">	
 								<div class="row">
 									<div class="col-md-6">
-										<div class="form-group" :class="{'has-error' : errors.has('form.nama')}">
+										<div class="form-group" :class="{'has-error' : errors.has('form.pertanyaan')}">
 											<!-- title -->
-											<label :class="{ 'text-danger' : errors.has('form.nama')}">
+											<label :class="{ 'text-danger' : errors.has('form.pertanyaan')}">
 												<i class="icon-cross2" v-if="errors.has('form.nama')"></i>
 												tempat pertanyaan </label>
 
@@ -228,6 +233,7 @@
 			wajibUkuran,
 			DatePicker
 		},
+		
 		data() {
 			return {
 				title: 'Tambah evaluasi kegiatan',
@@ -235,7 +241,7 @@
 				titleIcon: 'icon-plus3',
 				level: 2,
 				level2Title: 'evaluasi diklat',
-				kelas: 'evaluasiDiklat',
+				kelas: 'evaluasiKegiatan',
 				sasaran: [],
 				tempatData: '',
 				ckeditorNoImageConfig: {
@@ -312,6 +318,9 @@
 		beforeRouteEnter(to, from, next) {
 			next(vm => vm.fetch());
 		},
+		updated(){
+			console.log(this.itemData);
+		},
 		watch: {
 			// modelTempatStat(value){
 			// 	if(value === "success"){
@@ -346,6 +355,7 @@
     },
 		methods: {
 			fetch(){
+				this.$store.dispatch('pertanyaanEvaluasi' + '/index');
 				if(this.$route.meta.mode == 'edit'){
 					this.$store.dispatch(this.kelas + '/edit',this.$route.params.id);	
 				} else {
@@ -521,13 +531,17 @@
 			}
 		},
 		computed: {
-			...mapGetters('evaluasiDiklat',{
+			...mapGetters('evaluasiKegiatan',{
 				form: 'data',
 				formStat: 'dataStat',
 				rules: 'rules',
 				options: 'options',
 				updateResponse: 'update',
 				updateStat: 'updateStat'
+			}),
+			...mapGetters('pertanyaanEvaluasi',{
+				itemData: 'dataS',
+				itemDataStat: 'dataStatS'
 			})
 		}
 	}
